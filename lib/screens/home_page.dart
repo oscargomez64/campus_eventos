@@ -14,23 +14,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String categoriaSeleccionada = 'Todos';
 
+  List<Map<String, dynamic>> _obtenerEventos() {
+    if(categoriaSeleccionada == 'Todos') {
+      return eventos;
+    }
+    final List<Map<String, dynamic>> res = [];
+    for (final evento in eventos) {
+      if (evento['categoria'] == categoriaSeleccionada) {
+        res.add(evento);
+      }
+    }
+    return res;
+  }
+  
   @override
   Widget build(BuildContext context) {
-    // TODO:
-    // Actualmente se muestran TODOS los eventos.
-    //
-    // El alumno debe modificar esta parte para que:
-    //
-    // - Si categoriaSeleccionada == 'Todos':
-    //     se muestren todos los eventos.
-    //
-    // - Si se selecciona otra categoría:
-    //     solamente aparezcan los eventos de esa categoría.
-    //
-    // Pista:
-    // List.where(...).toList();
-
-    final eventosMostrados = eventos;
+    final eventosMostrados = _obtenerEventos();
 
     return Scaffold(
       appBar: AppBar(
@@ -112,9 +111,9 @@ class _HomePageState extends State<HomePage> {
                         return EventCard(
                           evento: evento,
                           onPressed: () {
-                            // TODO:
-                            // Mostrar un SnackBar indicando el evento
-                            // seleccionado.
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Has seleccionado el evento ${evento['titulo']}'),
+                            ));
                           },
                         );
                       },
