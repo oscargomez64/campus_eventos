@@ -30,7 +30,7 @@ class EventCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 2),
             child: Text(
               evento['titulo'],
               maxLines: 2,
@@ -41,23 +41,57 @@ class EventCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(evento['categoria']),
+            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 4,
+              children: [
+                Icon(Icons.label_rounded, size: 17),
+                Text(evento['categoria']),
+              ],
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
-            child: Text(evento['fecha']),
+            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 4,
+              children: [
+                Icon(Icons.calendar_month_rounded, size: 17,),
+                Text("${evento['fecha']} a las ${evento['hora']}"),
+              ],
+            ),
           ),
-
-          // TODO 1:
-          // Agregar al diseño la hora, el lugar y el cupo del evento.
-          //
-          // TODO 2:
-          // Agregar un botón que permita registrarse o marcar
-          // el evento como "Me interesa".
-          //
-          // El botón deberá ejecutar:
-          // onPressed();
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 4,
+              children: [
+                Icon(Icons.location_city_rounded, size: 17),
+                Text(evento['lugar']),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 4,
+              children: [
+                Icon(Icons.groups, size: 17),
+                Text("${evento['cupo']} cupos"),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: onPressed,
+              icon: const Icon(Icons.library_add_check_rounded),
+              label: const Text('Registrarme'),
+            ),
+          ),
 
           const SizedBox(height: 8),
         ],

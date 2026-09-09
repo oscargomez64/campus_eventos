@@ -95,7 +95,9 @@ class _HomePageState extends State<HomePage> {
                         ? 4
                         : constraints.maxWidth >= 600
                             ? 3
-                            : 2;
+                            : constraints.maxWidth >= 480
+                              ? 2
+                              : 1;
 
                     return GridView.builder(
                       itemCount: eventosMostrados.length,
@@ -112,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                           evento: evento,
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Has seleccionado el evento ${evento['titulo']}'),
+                              content: Text('Te has registrado al evento ${evento['titulo']}'),
                             ));
                           },
                         );
